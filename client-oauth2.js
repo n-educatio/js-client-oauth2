@@ -634,7 +634,9 @@ CodeFlow.prototype.getToken = function (uri, state) {
   return this.client._request({
     url: options.accessTokenUri,
     method: 'POST',
-    headers: extend(DEFAULT_HEADERS),
+    headers: extend(DEFAULT_HEADERS, {
+      Authorization: auth(options.clientId, options.clientSecret)
+    }),
     body: {
       code: data.code,
       grant_type: 'authorization_code',
